@@ -328,9 +328,9 @@
   /* ---------- Join / form ---------- */
   .join-grid{ display:grid; grid-template-columns: 0.85fr 1.15fr; gap:56px; }
   .join-info h2{ font-size:clamp(30px,4vw,46px); }
-  .join-info p{ color:#4a4c6b; margin-top:16px; max-width:42ch; }
+  .join-info p{ color:rgba(255,255,255,0.8); margin-top:16px; max-width:42ch; }
   .join-perks{ margin-top:28px; display:flex; flex-direction:column; gap:14px; }
-  .join-perks div{ display:flex; gap:12px; align-items:flex-start; font-size:14.5px; color:#33345a; }
+  .join-perks div{ display:flex; gap:12px; align-items:flex-start; font-size:14.5px; color:rgba(255,255,255,0.9); }
   .join-perks .bullet{ width:8px; height:8px; border-radius:50%; background:var(--orange); margin-top:7px; flex-shrink:0; }
 
   form.card{
@@ -918,7 +918,7 @@
   // ---- join form -> Google Sheet (via Apps Script Web App) + repli mailto ----
   // 1) Colle ici l'URL "Web App" obtenue après déploiement de ton Apps Script (voir instructions fournies).
   //    Tant qu'elle est vide, le formulaire utilise le mailto en repli.
-  const SHEET_WEBAPP_URL = ''; // ex: 'https://script.google.com/macros/s/XXXXXXXX/exec'
+  const SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxERrsRFmycml7W0y3k1qN1Jse_S7Xp6JSm7J3JXbAZBln6978M1ydpGp0p8veM_p1A/exec';
 
   // Adresse mail utilisée en repli si SHEET_WEBAPP_URL n'est pas configurée :
   const cripes_EMAIL = 'cripes@polytechnique-sousse.tn';
@@ -970,13 +970,6 @@ ${msg}`;
       status.textContent = "Ton client mail va s'ouvrir avec ta candidature pré-remplie — il ne reste plus qu'à l'envoyer !";
     }
   });
-  function doPost(e) {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  const p = e.parameter;
-  sheet.appendRow([p.date, p.nom, p.email, p.filiere, p.telephone, p.pole, p.motivation]);
-  return ContentService.createTextOutput(JSON.stringify({ result: "success" }))
-    .setMimeType(ContentService.MimeType.JSON);
-}
 </script>
 
 </body>
